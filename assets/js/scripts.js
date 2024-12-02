@@ -36,9 +36,14 @@ document.getElementById('map').style.setProperty('height', window.innerHeight + 
 
 map.on('dblclick',function(event){
     // alert(event.latlng.lat + " , " + event.latlng.lng);
-    L.marker([event.latlng.lat, event.latlng.lng]).addTo(map)
     // 1: add marker after double click
+    L.marker(event.latlng).addTo(map);
     // 2: open modal (form) for saving the location
+    $('.modal-overlay').fadeIn(500);
+    $('#lat-display').val(event.latlng . lat);
+    $('#lng-display').val(event.latlng . lng);
+    $('#l-type').val(0);
+    $('#l-title').val('');
     // 3: fill the form and submit the location data to the server
     // 4: save the location in the database with (status: pending review)
     // 5: review locations and verify
@@ -73,4 +78,37 @@ function locate() {
 }
 
 // Call locate every 5 seconds ... forever
-setInterval(locate, 2000);
+// setInterval(locate, 2000);
+
+
+
+// closing the form with clicking on the X
+$(document).ready(function(){
+    $('form#addLocationForm').submit(function(e){
+        e.preventDefault(); // prevent form from submitting
+
+        var form = $(this); 
+        var resultTag = form.find('.ajax-result');
+        $.ajax({
+            url: form.attr('action'),
+            method: form.attr('method'),
+            data: form.serialize(),
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            },
+            success: function(response){
+                resultTag.html(response);
+            },
+            error: function(xhr, status, error) {
+                resultTag.html('Error: ' + error);
+            }
+        });
+    });
+
+    $('.modal-overlay .close').click(function(){
+        $('.modal-overlay').fadeOut();
+    });
+});
+
+
+
