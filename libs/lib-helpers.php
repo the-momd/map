@@ -38,7 +38,7 @@ function message($msg, $cssClass = 'info'){
 
 
 function dd($var){
-    echo "<pre style='color:#d40202; background: #fefbfb; z-index:999; position:relative; padding:10px; margin:10px; border-radius:5px; border-left:3px solid red;'>";
+    echo "<pre style='text-align:left; direction:ltr; color:#d40202; background: #fefbfb; z-index:999; position:relative; padding:10px; margin:10px; border-radius:5px; border-left:3px solid red;'>";
     var_dump($var);
     echo "</pre>";
 }

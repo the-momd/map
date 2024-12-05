@@ -44,8 +44,8 @@ map.on('dblclick',function(event){
     $('#lng-display').val(event.latlng . lng);
     $('#l-type').val(0);
     $('#l-title').val('');
-    // 3: fill the form and submit the location data to the server
-    // 4: save the location in the database with (status: pending review)
+    // done 3: fill the form and submit the location data to the server
+    // done 4: save the location in the database with (status: pending review)
     // 5: review locations and verify
 }); 
 

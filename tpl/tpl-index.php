@@ -11,12 +11,27 @@
 <body>
     <div class="main">
         <div class="head">
-            <input type="text" id="search" placeholder="دنبال کجا می‌گردی؟">
+        <div class="search-box">
+        <input type="text" id="search" placeholder="دنبال کجا می گردی؟">
+        <div class="clear"></div>
+        <div class="search-results">
+        <div class="result-item" data-lat='111' data-lng='222'>
+            <span class="loc-type">رستوران</span>
+            <span class="loc-title">رستوران و قوه خانه سنتی سون لرن</span>
+        </div>
+        <div class="result-item" data-lat='111' data-lng='222'>
+            <span class="loc-type">دانشگاه</span>
+            <span class="loc-title">دانشگاه شریف</span>
+        </div>
+        </div>
+        </div>
         </div>
         <div class="mapContainer">
-            <div id="map" style="height: 600px;"></div>
+            <div id="map"></div>
         </div>
+        <img src="assets/css/images/current.png" class="currentLoc">
     </div>
+
     <div class="modal-overlay" style="display: none;">
         <div class="modal">
             <span class="close">x</span>
@@ -26,8 +41,8 @@
                 <div class="field-row">
                             <div class="field-title">مختصات</div>
                             <div class="field-content">
-                                <input type="text" id="lat-display" name="lat" readonly style="width: 160px; text-align:center">
-                                <input type="text" id="lng-display" name="lng" readonly style="width: 160px; text-align:center">
+                                <input type="text" name='lat' id="lat-display" readonly style="width: 160px;text-align: center;">
+                                <input type="text" name='lng' id="lng-display" readonly style="width: 160px;text-align: center;">
                             </div>
                     </div>
                     <div class="field-row">
@@ -39,10 +54,10 @@
                     <div class="field-row">
                         <div class="field-title">نوع</div>
                         <div class="field-content">
-                            <select name="type" id="l-type">
+                            <select name="type" id='l-type'>
                             <?php foreach(locationTypes as $key=>$value): ?>
                             <option value="<?=$key?>"><?=$value?></option>
-                            <?php endforeach;  ?>
+                            <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -57,7 +72,16 @@
             </div>
         </div>
     </div>
+
+
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/scripts.js"></script>
+    <script>
+        <?php if($location): ?>
+            L.marker([<?= $location->lat ?>, <?= $location->lng ?>]).addTo(map).bindPopup("<?= $location->title ?>").openPopup();
+        <?php endif; ?>
+    </script>
+
 </body>
 </html>
