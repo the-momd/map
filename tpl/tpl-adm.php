@@ -117,18 +117,18 @@ use Hekmatinasser\Verta\Verta;
                 <tbody>
                     <?php foreach($locations as $loc): ?>
                     <tr>
-                        <td style="text-align:right;"><?= $loc->title ?></td>
-                        <td class="text-center"><?=Verta::instance($loc->created_at)->format('%d  %B  %Y');;  ?></td>
-                        <td class="text-center"><?= $loc->lat ?></td>
-                        <td class="text-center"><?= $loc->lng ?></td>
-                        <td style="text-align:right;">
-                            <button class="statusToggle <?= $loc->verified ? 'active' : '' ?>" data-loc='<?= $loc->id ?>'>
-                            <?= $loc->verified ? 'فعال' : 'غیر فعال' ?>
-                            </button> 
-                            <button class="preview" data-loc='<?= $loc->id ?>'>👁️‍🗨️</button> 
-                        </td>
+                    <td><?=$loc->title?></td>
+                    <td class="text-center"><?=Verta::instance($loc->created_at)->format('%d %B %Y');;?></td>
+                    <td class="text-center"><?=$loc->lat?></td>
+                    <td class="text-center"><?=$loc->lng?></td>
+                    <td>
+                        <button class="statusToggle <?= $loc->verified ? 'active' : '' ?>" data-loc='<?=$loc->id?>'>
+                            تایید
+                        </button> 
+                        <button class="preview" data-loc='<?=$loc->id?>'>👁️‍🗨️</button> 
+                    </td>
                     </tr>
-                    <?php endforeach; ?>        
+                            <?php endforeach; ?>        
                 </tbody>
             </table>
         </div>
@@ -159,11 +159,7 @@ use Hekmatinasser\Verta\Verta;
                     success: function(response){
                         if(response == 1){
                             btn.toggleClass('active');
-                            if(btn.html()=='فعال'){
-                                btn.html('غیر فعال');
-                            }else{
-                                btn.html('فعال');
-                            }
+                            
                         }
                     }
                 });

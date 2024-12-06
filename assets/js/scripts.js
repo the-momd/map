@@ -109,6 +109,3 @@ $(document).ready(function(){
         $('.modal-overlay').fadeOut();
     });
 });
-
-
-

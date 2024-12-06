@@ -12,24 +12,21 @@
     <div class="main">
         <div class="head">
         <div class="search-box">
-        <input type="text" id="search" placeholder="دنبال کجا می گردی؟">
+        <input type="text" id="search" placeholder="دنبال کجا می گردی؟" autocomplete="off">
         <div class="clear"></div>
-        <div class="search-results">
-        <div class="result-item" data-lat='111' data-lng='222'>
-            <span class="loc-type">رستوران</span>
-            <span class="loc-title">رستوران و قوه خانه سنتی سون لرن</span>
+        <div class="search-results" style="display: none;">
         </div>
-        <div class="result-item" data-lat='111' data-lng='222'>
+         <!-- <div class="result-item" data-lat='111' data-lng='222'>
             <span class="loc-type">دانشگاه</span>
             <span class="loc-title">دانشگاه شریف</span>
-        </div>
-        </div>
+        </div> -->
         </div>
         </div>
         <div class="mapContainer">
             <div id="map"></div>
         </div>
         <img src="assets/css/images/current.png" class="currentLoc">
+        <img src="assets/css/images/restaurant.png" class="nearRst">
     </div>
 
     <div class="modal-overlay" style="display: none;">
@@ -85,6 +82,24 @@
             $('img.currentLoc').click(function(){
                 locate();
             });
+        // $(document).ready(function(){
+        //     $('img.nearRst').click(function(){
+        //         getRestaurants();
+        //     });
+        // });
+        $('#search').keyup(function(){
+            const input = $(this);
+            const searchReasult = $('.search-results');
+            searchReasult.html('در حال جستجو');
+                $.ajax({
+                    url: '<?= BASE_URL . 'process/search.php' ?>',
+                    method: 'post',
+                    data: {keyword:input.val()},
+                    success: function(response){
+                        searchReasult.slideDown().html(response);
+                    }
+                });
+        });
         });
     </script>
 
